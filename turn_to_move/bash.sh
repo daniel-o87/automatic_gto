@@ -1,5 +1,6 @@
 #!/bin/bash
 
+rm *.png *.tiff *.txt
 FILENAME="$1"
 echo "turn_to_move"
 python ready.py "$FILENAME"
@@ -14,7 +15,7 @@ for file in *_enhanced.tiff; do
 
     # Run Tesseract OCR on the .tiff file to extract text
     # Note: Change 'eng' to your desired language code if necessary
-    tesseract "$file" "$output_txt" --oem 2 --psm 7 > /dev/null 2>&1
+    tesseract "$file" "$output_txt" --psm 7 > /dev/null 2>&1
 
     # Optional: Output the OCR results to the console
     #echo "OCR results for $file stored in $output_txt:"

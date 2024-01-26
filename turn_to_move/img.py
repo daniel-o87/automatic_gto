@@ -8,7 +8,7 @@ else:
     print("No filename provided.")
 
 # Load image
-image = cv2.imread('number.png')
+image = cv2.imread('../full_img/' + filename)
 
 # Convert to grayscale
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

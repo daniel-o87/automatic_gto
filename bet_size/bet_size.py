@@ -1,19 +1,43 @@
 from PIL import Image
 import sys
-if len(sys.argv) > 1:  # Checking if any argument is passed
-    filename = sys.argv[1]  # The first argument after the script name
-    print("Received filename:", filename)
-    # Your function that utilizes the filename
+
+def read_player_status(file_path):
+    """Reads the player status from the file and returns a set of active players."""
+    active_players = set()
+    with open(file_path, 'r') as file:
+        for line in file:
+            player, status = line.strip().split(':')
+            if status == 'active':
+                active_players.add(player)
+    return active_players
+
+def process_images_for_active_players(filename, players_loc, active_players):
+    """Processes images only for active players."""
+    screenshot = Image.open("../full_img/" + filename)
+    for player in players_loc:
+        if player in active_players:
+            coords = players_loc[player]
+            crop = screenshot.crop((coords[0], coords[1], coords[0]+coords[2], coords[1]+coords[3]))
+            crop.save(player + "testing.png")
+
+# Check if a filename is provided
+if len(sys.argv) > 1:
+    filename = sys.argv[1]
 else:
     print("No filename provided.")
+    sys.exit(1)
 
-screenshot = Image.open("../full_img/1.png")
+# Read player status
+player_status_file = '../player_status.txt'  # Update with the correct path
+active_players = read_player_status(player_status_file)
 
-players_loc = {"1": [575, 625, 250, 50] , "2": [1070, 550, 250, 50 ],
-               "3": [1610, 630, 250, 40], "4": [1610, 935, 250, 50], 
-               "5": [1425, 1090, 250, 50], "6": [710, 1090, 250, 40], 
-               "7": [539, 940, 250, 40]}
+# Player locations (example for bet_size folder, adjust for others)
+players_loc = {
+    "1": [575, 625, 250, 50], "2": [1070, 550, 250, 50],
+    "3": [1610, 630, 250, 40], "4": [1610, 935, 250, 50],
+    "5": [1425, 1090, 250, 50], "6": [710, 1090, 250, 40],
+    "7": [539, 940, 250, 40]
+}
 
-for i in players_loc:
-    crop = screenshot.crop((players_loc[i][0], players_loc[i][1], players_loc[i][0]+players_loc[i][2], players_loc[i][1]+players_loc[i][3]))
-    crop.save(i+"testing.png")
+# Process images for active players
+process_images_for_active_players(filename, players_loc, active_players)

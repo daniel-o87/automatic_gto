@@ -1,8 +1,10 @@
 #!/bin/bash
 
-FILENAME="$1"
-echo "stack"
-python stack.py "$FILENAME"
+#rm *.png *.txt *.tiff
+#FILENAME="$1"
+sleep 3
+echo "Starting to check stack"
+python stack.py #"$FILENAME"
 # Loop through each testing.png file in the directory
 for file in *testing.png; do
     # Extract the base name without 'testing.png'
@@ -15,7 +17,7 @@ for file in *testing.png; do
     convert "$file" -colorspace Gray -contrast-stretch 0% -threshold 50% "$output_tiff"
 
     # Run Tesseract OCR on the preprocessed TIFF file to extract text
-    tesseract "$output_tiff" "$output_txt" --oem 2 --psm 7 > /dev/null 2>&1 
+    tesseract "$output_tiff" "$output_txt" --psm 7 > /dev/null 2>&1 
 
     # Check the OCR output
     #if [ -s "$output_txt" ]; then
@@ -28,3 +30,4 @@ for file in *testing.png; do
 done
 
 #echo "Conversion and OCR processing completed."
+./update_player_status.sh

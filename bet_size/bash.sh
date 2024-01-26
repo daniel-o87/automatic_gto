@@ -1,5 +1,5 @@
 #!/bin/bash
-
+rm *.png *.txt *.tiff
 FILENAME="$1"
 echo "bet_size"
 python bet_size.py "$FILENAME"
@@ -16,7 +16,7 @@ for file in *testing.png; do
     convert "$file" -colorspace Gray -contrast-stretch 0% -threshold 50% "$output_tiff"
 
     # Run Tesseract OCR on the preprocessed TIFF file to extract text
-    tesseract "$output_tiff" "$output_txt" --oem 2 --psm 7 > /dev/null 2>&1 
+    tesseract "$output_tiff" "$output_txt" --psm 7 > /dev/null 2>&1 
 
     # Check the OCR output
     #if [ -s "$output_txt" ]; then
@@ -28,4 +28,4 @@ for file in *testing.png; do
     #head "$output_txt.txt"
 done
 
-#echo "Conversion and OCR processing completed."
+python update.py
