@@ -14,10 +14,13 @@ for file in *testing.png; do
     output_tiff="${base_name}.tiff"
     output_txt="${base_name}"
 
-    convert "$file" -colorspace Gray -contrast-stretch 0% -threshold 50% "$output_tiff"
-
+#
     # Run Tesseract OCR on the preprocessed TIFF file to extract text
-    tesseract "$output_tiff" "$output_txt" --psm 7 > /dev/null 2>&1 
+	#tesseract --psm 13 "$output_tiff" "$output_txt" #> /dev/null 2>&1 
+convert "$file" -contrast-stretch 0% -colorspace Gray -morphology Convolve Gaussian:0x1 -sharpen 0x3 -level 20%,80% -negate -units PixelsPerInch -density 300 "$output_tiff"
+
+        # Run Tesseract OCR on the preprocessed TIFF file to extract text
+    tesseract "$output_tiff" "$output_txt" --psm 7 > /dev/null 2>&1
 
     # Check the OCR output
     #if [ -s "$output_txt" ]; then
@@ -30,4 +33,4 @@ for file in *testing.png; do
 done
 
 #echo "Conversion and OCR processing completed."
-./update_player_status.sh
+#./update_player_status.sh

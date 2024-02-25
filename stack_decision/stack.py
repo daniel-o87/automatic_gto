@@ -33,10 +33,10 @@ def take_screenshot_and_crop(players_loc, active_players):
                 cropped_img.save(player + "testing.png")
 
 # Player locations and status file
-players_loc = {"1": [295, 565, 250, 55], "2": [1100, 400, 250, 45],
-               "3": [1975, 570, 250, 45], "4": [1990, 1025, 250, 65],
-               "5": [1465, 1320, 250, 45], "6": [745, 1320, 250, 45],
-               "7": [539, 940, 250, 45]}
+players_loc = {"1": [163, 277, 100, 26], "2": [707, 165, 136, 30],
+               "3": [1292, 282, 154, 30], "4": [1300, 593, 105, 30],
+               "5": [940, 793, 90, 30], "6": [460, 791, 130, 30],
+               "7": [133, 595, 95, 30]}
 player_status_file = '../player_status.txt'
 
 # Continuously take screenshots and process
