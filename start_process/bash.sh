@@ -7,16 +7,16 @@ while true; do
     FILENAME=$(python check_rng.py)
 
     # Convert the cropped image to TIFF format
-    convert rng.png output.tiff
+	convert "$file" -contrast-stretch 0% -colorspace Gray -density 300 "$output_tiff"
 
-    # Run Tesseract OCR on the TIFF image
-    tesseract --psm 7 output.tiff eng > /dev/null 2>&1
+        # Run Tesseract OCR on the preprocessed TIFF file to extract text
+    tesseract "$output_tiff" "$output_txt" --psm 7 > /dev/null 2>&1
 
     # Read the content of eng.txt
     file_content=$(cat eng.txt)
 
     # Check the content
-    if [ "$file_content" == "RNG in progress" ]; then
+    if [ "$file_content" == "RNG" ]; then
         # Write player status to player_status.txt
         cd ../
         cat > player_status.txt <<EOF

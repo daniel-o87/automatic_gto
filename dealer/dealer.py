@@ -30,9 +30,9 @@ player_status_file = '../player_status.txt'  # Update with the correct path
 active_players = read_player_status(player_status_file)
 
 
-players_loc = {"1": [360, 641, 100, 100] , "2": [900, 480, 100, 100],
-               "3": [1920, 650, 100, 100], "4": [1850, 1140, 50, 50],
-               "5": [1200, 1180, 100, 100], "6": [510, 1185, 100, 100], 
-               "7": [395, 1100, 100, 100]}
+players_loc = {"1": [206, 346, 75, 75] , "2": [565, 225, 75, 75],
+               "3": [1261, 348, 75, 75], "4": [1200, 660, 75, 75],
+               "5": [773, 706, 75, 75], "6": [314, 703, 50, 50], 
+               "7": [240, 654, 75, 75]}
 
 process_images_for_active_players(filename, players_loc, active_players)

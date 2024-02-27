@@ -1,4 +1,7 @@
 from PIL import Image
+from mss import mss
+import datetime
+import os
 import sys
 
 def read_player_status(file_path):
@@ -11,33 +14,36 @@ def read_player_status(file_path):
                 active_players.add(player)
     return active_players
 
-def process_images_for_active_players(filename, players_loc, active_players):
-    """Processes images only for active players."""
-    screenshot = Image.open("../full_img/" + filename)
+def take_screenshot_and_crop(players_loc, active_players):
+    """Take a screenshot of the entire screen and crop for each active player."""
+    # Generate a unique filename based on the current timestamp
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+    full_img_filename = f"../full_img/screenshot_{timestamp}.png"
+
+    # Take a screenshot and save it
+    with mss() as sct:
+        sct.shot(output=full_img_filename)
+
+    # Crop the screenshot for each active player
     for player in players_loc:
         if player in active_players:
             coords = players_loc[player]
-            crop = screenshot.crop((coords[0], coords[1], coords[0]+coords[2], coords[1]+coords[3]))
-            crop.save(player + "testing.png")
-
-# Check if a filename is provided
-if len(sys.argv) > 1:
-    filename = sys.argv[1]
-else:
-    print("No filename provided.")
-    sys.exit(1)
-
-# Read player status
-player_status_file = '../player_status.txt'  # Update with the correct path
-active_players = read_player_status(player_status_file)
+            with Image.open(full_img_filename) as img:
+                cropped_img = img.crop((coords[0], coords[1], coords[0]+coords[2], coords[1]+coords[3]))
+                cropped_img.save(player + "testing.png")
 
 # Player locations (example for bet_size folder, adjust for others)
 players_loc = {
-    "1": [575, 625, 250, 50], "2": [1070, 550, 250, 50],
-    "3": [1610, 630, 250, 40], "4": [1610, 935, 250, 50],
-    "5": [1425, 1090, 250, 50], "6": [710, 1090, 250, 40],
-    "7": [539, 940, 250, 40]
+    "1": [379, 322, 150, 30], "2": [691, 269, 150, 30],
+    "3": [1060, 322, 150, 30], "4": [1068, 531, 150, 30],
+    "5": [939, 638, 150, 30], "6": [452, 634, 150, 30],
+    "7": [362, 532, 150, 30]
 }
 
-# Process images for active players
-process_images_for_active_players(filename, players_loc, active_players)
+# Read player status
+player_status_file = '../player_status.txt'
+
+# Continuously take screenshots and process
+active_players = read_player_status(player_status_file)
+take_screenshot_and_crop(players_loc, active_players)
+

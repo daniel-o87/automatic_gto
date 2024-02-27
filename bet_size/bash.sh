@@ -2,7 +2,8 @@
 rm *.png *.txt *.tiff
 FILENAME="$1"
 echo "bet_size"
-python bet_size.py "$FILENAME"
+sleep 3
+python bet_size.py 
 
 # Loop through each testing.png file in the directory
 for file in *testing.png; do
@@ -13,10 +14,10 @@ for file in *testing.png; do
     output_tiff="${base_name}.tiff"
     output_txt="${base_name}"
 
-    convert "$file" -colorspace Gray -contrast-stretch 0% -threshold 50% "$output_tiff"
+	convert "$file" -contrast-stretch 0% -colorspace Gray -morphology Convolve Gaussian:0x1 -sharpen 0x3 -level 20%,80% -negate -units PixelsPerInch -density 300 "$output_tiff"
 
-    # Run Tesseract OCR on the preprocessed TIFF file to extract text
-    tesseract "$output_tiff" "$output_txt" --psm 7 > /dev/null 2>&1 
+        # Run Tesseract OCR on the preprocessed TIFF file to extract text
+    tesseract "$output_tiff" "$output_txt" --psm 7 > /dev/null 2>&1
 
     # Check the OCR output
     #if [ -s "$output_txt" ]; then
