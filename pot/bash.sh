@@ -1,9 +1,8 @@
 #!/bin/bash
 
-FILENAME="$1"
 echo "pot"
-python pot_size.py "$FILENAME"
+python pot_size.py 
 
-convert pot_size.png -colorspace Gray -contrast-stretch 0% -threshold 50% output.tiff
+convert image.png  -contrast-stretch 0% -colorspace Gray -density 300 output.tiff
 
 tesseract output.tiff number --psm 7 > /dev/null 2>&1 

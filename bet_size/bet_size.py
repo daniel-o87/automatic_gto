@@ -41,7 +41,7 @@ players_loc = {
 }
 
 # Read player status
-player_status_file = '../player_status.txt'
+player_status_file = '/home/do/Desktop/fun_testing/automatic_gto/player_status.txt'
 
 # Continuously take screenshots and process
 active_players = read_player_status(player_status_file)

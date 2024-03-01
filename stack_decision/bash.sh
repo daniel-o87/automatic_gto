@@ -2,7 +2,6 @@
 
 #rm *.png *.txt *.tiff
 #FILENAME="$1"
-sleep 3
 echo "Starting to check stack"
 python stack.py #"$FILENAME"
 # Loop through each testing.png file in the directory

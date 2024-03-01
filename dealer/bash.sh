@@ -2,7 +2,6 @@
 
 rm *.txt *.png *.tiff
 FILENAME="$1"
-sleep 3
 
 python test.py
 

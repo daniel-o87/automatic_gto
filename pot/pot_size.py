@@ -1,14 +1,14 @@
 from PIL import Image
+import datetime
 import sys
-if len(sys.argv) > 1:  # Checking if any argument is passed
-    filename = sys.argv[1]  # The first argument after the script name
-    print("Received filename:", filename)
-    # Your function that utilizes the filename
-else:
-    print("No filename provided.")
+from mss import mss
 
-screen = Image.open("../full_img/1.png")
+timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+full_img_filename = f"../full_img/screenshot_{timestamp}.png"
 
+with mss() as sct:
+    sct.shot(output=full_img_filename)
 
-x, y, w, h = 620, 310, 200, 50
-screen.crop((x, y, x+w, y+h)).save("pot_size.png")
+with Image.open(full_img_filename) as img:
+    x, y, w, h = 365, 100, 190, 29
+    img.crop((x, y, x+w, y+h)).save("image.png")
