@@ -16,7 +16,6 @@ with mss.mss() as sct:
         # Save the image file
         output_filename = f"{player}testing.png"
         mss.tools.to_png(sct_img.rgb, sct_img.size, output=output_filename)
-        print(f"Saved {output_filename}")
 
 
 # works

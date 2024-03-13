@@ -31,5 +31,6 @@ convert "$file" -contrast-stretch 0% -colorspace Gray -morphology Convolve Gauss
     #head "$output_txt.txt"
 done
 
+#python3 update.py
 #echo "Conversion and OCR processing completed."
-#./update_player_status.sh
+./update_player_status.sh

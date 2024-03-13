@@ -18,17 +18,4 @@ for file in *testing.png; do
     tesseract "$output_tiff" "$output_txt" --psm 7 > /dev/null 2>&1
   done
 
-for file in *.txt; do
-    # Read the content of the file
-    content=$(cat "$file")
-
-    # Check if the content is exactly "D"
-    if [[ "$content" == "D" ]]; then
-        # Extract the player number from the filename
-        player_number=$(basename "$file" ".txt")
-
-        # Update the game.txt file in the parent directory
-        echo "Player $player_number is Dealer" >> ../game.txt
-    fi
-done
-
+python3 update.py

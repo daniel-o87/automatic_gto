@@ -18,12 +18,6 @@ def process_images_for_active_players(filename, players_loc, active_players):
             crop = screenshot.crop((coords[0], coords[1], coords[0]+coords[2], coords[1]+coords[3]))
             crop.save(player + "testing.png")
 
-# Check if a filename is provided
-if len(sys.argv) > 1:
-    filename = sys.argv[1]
-else:
-    print("No filename provided.")
-    sys.exit(1)
 
 # Read player status
 player_status_file = '../player_status.txt'  # Update with the correct path

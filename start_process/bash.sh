@@ -1,5 +1,6 @@
 #!/bin/bash
 
+i3-msg workspace 6
 while true; do
     echo "start_process"
 
@@ -7,41 +8,22 @@ while true; do
     FILENAME=$(python check_rng.py)
 
     # Convert the cropped image to TIFF format
-	convert "$file" -contrast-stretch 0% -colorspace Gray -density 300 "$output_tiff"
+	convert rng.png -contrast-stretch 0% -colorspace Gray -density 300 aaaaa.tiff
 
         # Run Tesseract OCR on the preprocessed TIFF file to extract text
-    tesseract "$output_tiff" "$output_txt" --psm 7 > /dev/null 2>&1
+    tesseract aaaaa.tiff eng --psm 7 > /dev/null 2>&1
 
     # Read the content of eng.txt
-    file_content=$(cat eng.txt)
+	first_three=$(head -n 1 eng.txt | cut -c 1-3)
 
     # Check the content
-    if [ "$file_content" == "RNG" ]; then
+    if [ "$first_three" == "RNG" ]; then
+	cd ../pot && ./test.sh
         # Write player status to player_status.txt
-        cd ../
-        cat > player_status.txt <<EOF
-1:active
-2:active
-3:active
-4:active
-5:active
-6:active
-7:active
-EOF
-        cd -  # Return to the start_process directory
-        echo "YAY"
-        echo "Doing call_bashes.sh with $FILENAME"
-        ./call_bashes.sh "$FILENAME"
-
-        # Empty eng.txt to reset the condition
-        > eng.txt
-
-        # Optional: Add a delay before the next loop iteration
-        sleep 2
-    else
-        echo "RNG check in progress..."
+        #cd ../
+	#cd ../pot && ./bash.sh
+	echo "RNG IS MET"
+	cd ../stack_decision && ./bash.sh
+	break
     fi
-
-    # Delay to prevent high CPU usage, adjust as needed
-    sleep 0.5
 done

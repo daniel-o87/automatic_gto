@@ -22,7 +22,6 @@ def take_screenshot_and_crop(coords):
         cropped_img.save("rng.png")  # Saving cropped image in the current directory
 
     return full_img_filename
-time.sleep(5)
 
 # Define the crop area: x, y, w, h
 crop_area = [1371, 70, 28, 17] 
