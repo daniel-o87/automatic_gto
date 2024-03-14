@@ -4,7 +4,7 @@ import sys
 from mss import mss
 
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-full_img_filename = f"../automatic_gto/full_img/screenshot_{timestamp}.png"
+full_img_filename = f"../full_img/screenshot_{timestamp}.png"
 
 with mss() as sct:
     sct.shot(output=full_img_filename)
