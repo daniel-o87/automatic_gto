@@ -15,19 +15,13 @@ def preprocess_image(image_path, target_size=(86, 63)):
     image = np.expand_dims(image, axis=0)
     return image
 
-"""image = load_img('non_card.png', target_size=(86, 63))  
-image = img_to_array(image)
-image = np.expand_dims(image, axis=0)
-
-prediction = model.predict(image)
-"""
 
 model = tf.keras.models.load_model('model.h5')
 print("Model loaded successfully.")
 
 # Define the threshold
 threshold = 0.5
-for i in range(1, 20):
+for i in [1, 2, 3, 4, 5, 6, 7, "flop", "turn", "river"]"
     image_path = f"{i}.png"
     preprocessed_image = preprocess_image(image_path)
 
@@ -41,19 +35,3 @@ for i in range(1, 20):
         print(f"Image is a card.")
     else:
         print(f"Image is no_card.")
-
-
-
-"""for i in range(1, 20):
-        image = load_img(f'{i}.png', target_size=(86, 63))  
-            image = img_to_array(image)
-                image = np.expand_dims(image, axis=0)
-
-                    prediction = model.predict(image)
-
-                        # Interpret the prediction based on the threshold
-                            if prediction[0][0] > threshold:
-                                        print(f"Image {i} is a card.")
-                                            else:
-                                                        print(f"Image {i} is no_card.")
-                                                        """
