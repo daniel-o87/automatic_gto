@@ -19,7 +19,7 @@ aws dynamodb create-table \
     --key-schema AttributeName=PK,KeyType=HASH AttributeName=SK,KeyType=RANGE \
     --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
     --endpoint-url http://localhost:8000
-
+'''
 This command sets up AgoroAuthTable with the necessary key schema for your authentication data.
 Verifying Table Creation
 
