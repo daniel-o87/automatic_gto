@@ -21,6 +21,7 @@ aws dynamodb create-table \
     --endpoint-url http://localhost:8000
 ```
 This command sets up AgoroAuthTable with the necessary key schema for your authentication data.
+bash
 Verifying Table Creation
 
 To confirm that your table has been successfully created in DynamoDB Local, run:
