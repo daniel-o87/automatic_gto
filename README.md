@@ -21,8 +21,8 @@ aws dynamodb create-table \
     --endpoint-url http://localhost:8000
 ```
 This command sets up AgoroAuthTable with the necessary key schema for your authentication data.
-bash
-Verifying Table Creation
+
+### Verifying Table Creation
 
 To confirm that your table has been successfully created in DynamoDB Local, run:
 
@@ -30,7 +30,7 @@ To confirm that your table has been successfully created in DynamoDB Local, run:
 aws dynamodb list-tables --endpoint-url http://localhost:8000
 ```
 You should see AgoroAuthTable listed among the tables in your local DynamoDB instance.
-Running the Mock Website
+### Running the Mock Website
 
 Navigate to the directory containing your mock website files (index.html and app.js). Start a simple HTTP server on port 8081:
 
@@ -38,7 +38,7 @@ Navigate to the directory containing your mock website files (index.html and app
 python -m http.server 8081
 ```
 Now, you can open http://localhost:8081 in your web browser to interact with your mock website and test the authentication flow.
-Verifying Data in DynamoDB
+### Verifying Data in DynamoDB
 
 After inputting data through the mock website, you can verify that the information has been correctly saved to AgoroAuthTable by scanning the table:
 
