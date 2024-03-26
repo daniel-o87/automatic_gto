@@ -10,5 +10,5 @@ with mss() as sct:
     sct.shot(output=full_img_filename)
 
 with Image.open(full_img_filename) as img:
-    x, y, w, h = 345, 96, 190, 29
+    x, y, w, h = 356, 96, 195, 40
     img.crop((x, y, x+w, y+h)).save("image.png")
