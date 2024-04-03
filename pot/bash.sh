@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo "pot"
 python pot_size.py 
 

@@ -14,6 +14,13 @@ for file in "$txt_directory"*.txt; do
         echo "HE FOLDS HE FOLDS"
         # Update player status to 'folded' in player_status.txt
         sed -i '' "s/^$player:.*/$player:folded/" "$player_status_file"
+    elif grep -qi "Check" "$file"; then
+	    echo "$player checks"
+    elif grep -qi "Raise" "$file"; then
+	echo "$player raises"
+    else
+	echo "$player has "
+	cat "$file"
     fi
 done
 

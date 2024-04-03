@@ -1,6 +1,20 @@
 import os
-from PIL import Image
-import sys
+
+# Like the name says
+def contains_no_letters(s):
+        return not any(char.isalpha() for char in s)
+# adds the decimal value from 2 spaces from the back
+def modification(s):
+    output = ""
+    if not "." in s:
+        beg = s[1:-2]
+        end = s[-2:]
+        output = "".join(beg) + "." + "".join(end)
+    else:
+        beg = s[1:-2]
+        end = s[-2:]
+        output = "".join(beg) + "".join(end)
+    return output
 
 def read_player_status(file_path):
     """Reads the player status from the file and returns a set of active players."""
@@ -19,10 +33,11 @@ def read_txt_files(directory, file_prefixes):
         file_path = os.path.join(directory, file_name)
         if os.path.exists(file_path):
             with open(file_path, 'r') as file:
-                # Process the file as needed
-                print(f"Contents of {file_name}:")
-                print(file.read())
-
+                content = file.readlines()
+                print(f"file {file_name} before mods {content}")
+                a = modification(content)
+            with open(file_path, 'w') as file:
+                file.writelines(a)
 # Get the current directory where the script is located
 current_directory = os.path.dirname(os.path.abspath(__file__))
 

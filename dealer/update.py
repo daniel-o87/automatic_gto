@@ -1,7 +1,5 @@
 import os
-from PIL import Image
 import subprocess
-import sys
 
 def read_player_status(file_path):
     """Reads the player status from the file and returns a set of active players."""
@@ -36,7 +34,6 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 # Update with the correct path for player_status.txt
 player_status_file = '../player_status.txt'  
 active_players = read_player_status(player_status_file)
-print("Active players:", active_players)
 
 # Read .txt files for active players
 read_txt_files(current_directory, active_players)

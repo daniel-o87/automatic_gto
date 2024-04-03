@@ -25,13 +25,35 @@ server_socket.listen()
 
 print("Listening for connections...")
 
+player_status_file = "../player_status.txt"
+
 while True:
     client_socket, addr = server_socket.accept()
     with client_socket:
         print(f"Connected by {addr}")
         image_path = client_socket.recv(1024).decode('utf-8')
         prediction = predict_image(image_path)
+        number = image_path.split(".")[0]
         threshold = 0.5
-        result = f"{image_path} is a card" if prediction < threshold else f"{image_path} is not a card"
+        if prediction < threshold:
+            result = f"{image_path} is a card"  
+        else:
+            result = f"{image_path} is not a card"
+            with open(player_status_file, 'r') as file:
+                    lines = file.readlines()
+                
+            for i, line in enumerate(lines):
+                if line.startswith(f"{number}:"):
+                    parts = line.split(':')
+                    parts[1] = "folded\n"  # Update status to folded
+                    lines[i] = ':'.join(parts)  
+                    break                 
+
+            with open(player_status_file, 'w') as file:
+                file.writelines(lines)
+
+            
+
+
         client_socket.sendall(result.encode('utf-8'))
 

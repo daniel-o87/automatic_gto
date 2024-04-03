@@ -18,12 +18,15 @@ while true; do
 
     # Check the content
     if [ "$first_three" == "RNG" ]; then
-	cd ../pot && ./test.sh
+	python logger.py
+#	cd ../pot && ./test.sh
         # Write player status to player_status.txt
         #cd ../
 	#cd ../pot && ./bash.sh
 	echo "RNG IS MET"
-	cd ../stack_decision && ./bash.sh
+	sleep 1
+	cd ../dealer && ./bash.sh
+#	cd ../stack_decision && ./bash.sh
 	break
     fi
 done
